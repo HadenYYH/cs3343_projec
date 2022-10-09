@@ -1,4 +1,4 @@
 //testing
 
 // Test github
-//test message from Ken
+//test message from Ken Man
