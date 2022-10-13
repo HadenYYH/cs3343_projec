@@ -1,5 +1,6 @@
 public class main{
 	public static void main(String[] args) {
-		services services=new services();
+		//Services services = new Services();
+		WelcomeFrame t = new WelcomeFrame();
 	}
 }

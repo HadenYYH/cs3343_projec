@@ -1,16 +1,19 @@
 import java.util.Scanner;
 
-	public class services{
-		page page;
-		public services() {
+	public class Services{
+		private Page page;
+		public Services() {
 			Scanner sc=new Scanner(System.in); 
 			String input;
-			this.page = new page();
+			this.page = new Page();
 			this.page.welcomePage();
 			pressEnterToContinue();
 			do {
 				this.page.loginMenuPage();
 				input = sc.nextLine();
+				
+				System.out.println(input);
+				
 				switch(input) {
 				  case "1":
 					pressEnterToContinue();

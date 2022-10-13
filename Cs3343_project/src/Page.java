@@ -1,4 +1,4 @@
-public class page{
+public class Page{
 	
 	public void welcomePage() {
         System.out.println("=================================================");
