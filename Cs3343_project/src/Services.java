@@ -27,7 +27,7 @@ public class Services {
 		String user_data = "";
 		String file_name = sid + ".txt";
 		try {
-		    File target_file = new File(file_name);
+		    File target_file = new File("./src/user/" +file_name);
 		    Scanner myReader = new Scanner(target_file);
 		    user_data = myReader.nextLine();
 	        myReader.close();

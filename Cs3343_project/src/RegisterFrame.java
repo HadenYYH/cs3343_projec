@@ -194,6 +194,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
         	boolean pw_no_comma = !pw_text.matches(".*[,].*");
         	boolean pw2_correct = pw_text.equals(pw2_text);
         	boolean email_valid = email_text.endsWith("@my.cityu.edu.hk");
+            System.out.println(sid_exist);
         	
         	if (!sid_valid) {
             	result.setText("Invalid sid");
