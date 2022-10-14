@@ -35,7 +35,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         title.setLocation(300, 30);
         c.add(title);
  
-        sid = new JLabel("Email");
+        sid = new JLabel("Student ID");
         sid.setFont(new Font("Arial", Font.PLAIN, 20));
         sid.setSize(500, 20);
         sid.setLocation(300, 100);
