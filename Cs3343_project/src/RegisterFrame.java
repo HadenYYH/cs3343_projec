@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.HashMap;
+import java.security.NoSuchAlgorithmException;
 
 public class RegisterFrame extends JFrame implements ActionListener {
 	// Components of the Form
@@ -176,53 +176,63 @@ public class RegisterFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == sub) {
-        	String sidText = tsid.getText();
-        	String pwText = String.valueOf(tpw.getPassword());
-        	String pw2Text = String.valueOf(tpw2.getPassword());
-        	String emailText = temail.getText();
+        	String sid_text = tsid.getText();
+        	String name_text = tname.getText();
+        	String pw_text = String.valueOf(tpw.getPassword());
+        	String pw2_text = String.valueOf(tpw2.getPassword());
+        	String email_text = temail.getText();
         	
         	SidandPw sidandPw = SidandPw.getInstance();
+        	Services services = new Services();
         	
-        	boolean sidValid = (sidText.length() == 8) & sidText.matches("[0-9]+");
-        	boolean sidExist = sidandPw.containsKey(sidText);
-    		boolean pwLongEnough = (pwText.length() >= 8);
-        	boolean pwUpperCase = pwText.matches(".*[A-Z].*");
-        	boolean pwLowerCase = pwText.matches(".*[a-z].*");
-        	boolean pwSymbol = pwText.matches(".*[^\\w].*");
-        	boolean pwNoComma = !pwText.matches(".*[,].*");
-        	boolean pw2Correct = pwText.equals(pw2Text);
-        	boolean emailValid = emailText.endsWith("@my.cityu.edu.hk");
+        	boolean sid_valid = (sid_text.length() == 8) & sid_text.matches("[0-9]+");
+        	String sid_exist = services.getUserDataBySid(sid_text);
+    		boolean pw_long_enough = (pw_text.length() >= 8);
+        	boolean pw_upper_case = pw_text.matches(".*[A-Z].*");
+        	boolean pw_lower_case = pw_text.matches(".*[a-z].*");
+        	boolean pw_symbol = pw_text.matches(".*[^\\w].*");
+        	boolean pw_no_comma = !pw_text.matches(".*[,].*");
+        	boolean pw2_correct = pw_text.equals(pw2_text);
+        	boolean email_valid = email_text.endsWith("@my.cityu.edu.hk");
         	
-        	if (!sidValid) {
+        	if (!sid_valid) {
             	result.setText("Invalid sid");
             }
-        	else if(sidExist) {
+        	else if(sid_exist!=null) {
         		result.setText("This SID was registered");
         	}
-            else if (!emailValid) {
+            else if (!email_valid) {
             	result.setText("Invalid email");
             }
-            else if (!pwLongEnough) {
+            else if (!pw_long_enough) {
             	result.setText("Password must be longer than 8 chracters");
             }
-            else if (!pwUpperCase) {
+            else if (!pw_upper_case) {
             	result.setText("Password must contain an upper case letter");
             }
-            else if (!pwLowerCase) {
+            else if (!pw_lower_case) {
             	result.setText("Password must contain an lower case letter");
             }
-            else if (!pwSymbol) {
+            else if (!pw_symbol) {
             	result.setText("Password must contain a non-letter symbol");
             }
-            else if (!pwNoComma) {
+            else if (!pw_no_comma) {
             	result.setText("Password must not contain a comma");
             }
-            else if (!pw2Correct) {
+            else if (!pw2_correct) {
             	result.setText("Two passwords are different");
             }
             else {
+            	String hashed_pw = "";
+				try {
+					hashed_pw = services.getHashPw(sid_exist, pw_text);
+				} catch (NoSuchAlgorithmException e1) {
+					e1.printStackTrace();
+				}
+            	services.writeUserData(sid_text, name_text, email_text, hashed_pw);
             	SidandPw s = SidandPw.getInstance();
             	s.put(tsid.getText(), new String(tpw.getPassword()));
+            	s.get(sid_text);
             	result.setText("Login successful!");
             }
             
