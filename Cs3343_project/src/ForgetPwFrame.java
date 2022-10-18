@@ -2,23 +2,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class LoginFrame extends JFrame implements ActionListener {
+public class ForgetPwFrame extends JFrame implements ActionListener {
 	// Components of the Form
     private Container container;
     private JLabel title;
     private JLabel sid;
     private JTextField tsid;
-    private JLabel pw;
-    private JPasswordField tpw;
     private JButton sub;
-    private JButton forgetPw;
     private JButton back;
     private JLabel result;
     
  
     // constructor, to initialize the components
     // with default values.
-    public LoginFrame()
+    public ForgetPwFrame()
     {
         setTitle("Login");
         setBounds(300, 90, 900, 600);
@@ -28,7 +25,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         container = getContentPane();
         container.setLayout(null);
  
-        title = new JLabel("Login");
+        title = new JLabel("Forget Password");
         title.setFont(new Font("Arial", Font.PLAIN, 30));
         title.setSize(300, 30);
         title.setLocation(300, 30);
@@ -45,45 +42,25 @@ public class LoginFrame extends JFrame implements ActionListener {
         tsid.setSize(300, 20);
         tsid.setLocation(300, 125);
         container.add(tsid);
- 
-        pw = new JLabel("Password");
-        pw.setFont(new Font("Arial", Font.PLAIN, 20));
-        pw.setSize(300, 20);
-        pw.setLocation(300, 175);
-        container.add(pw);
-        
-        tpw = new JPasswordField();
-        tpw.setEchoChar('\u25cf');
-        tpw.setFont(new Font("Arial", Font.PLAIN, 15));
-        tpw.setSize(400, 20);
-        tpw.setLocation(300, 200);
-        container.add(tpw);
         
         sub = new JButton("Submit");
         sub.setFont(new Font("Arial", Font.PLAIN, 15));
         sub.setSize(200, 30);
-        sub.setLocation(300, 250);
+        sub.setLocation(300, 175);
         sub.addActionListener(this);
         container.add(sub);
-        
-        forgetPw = new JButton("forget password");
-        forgetPw.setFont(new Font("Arial", Font.PLAIN, 15));
-        forgetPw.setSize(200, 30);
-        forgetPw.setLocation(300, 300);
-        forgetPw.addActionListener(this);
-        container.add(forgetPw);
  
         back = new JButton("back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(200, 30);
-        back.setLocation(300, 350);
+        back.setLocation(300, 225);
         back.addActionListener(this);
         container.add(back);
         
         result = new JLabel("");
         result.setFont(new Font("Arial", Font.PLAIN, 20));
         result.setSize(500, 20);
-        result.setLocation(300, 400);
+        result.setLocation(300, 275);
         container.add(result);
  
         setVisible(true);
@@ -96,24 +73,15 @@ public class LoginFrame extends JFrame implements ActionListener {
     {
         if (e.getSource() == sub) {
         	String sidText = tsid.getText();
-        	String pwText = String.valueOf(tpw.getPassword());
-        	
         	Account account = new Account();
-        	account.login(sidText, pwText);
-        	
-        	if(account.loggedIn()) {
-            	new WelcomeFrame(account);
+        	if(account.checkForget(sidText)) {
+        		new LoginFrame();
             	this.dispose();
         	}
         }
-        
-        else if (e.getSource() == forgetPw) {
-        	new ForgetPwFrame();
-            this.dispose();
-        }
  
         else if (e.getSource() == back) {
-        	new SelectionFrame();
+        	new LoginFrame();
             this.dispose();
         }
     }
