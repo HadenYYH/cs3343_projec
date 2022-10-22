@@ -2,5 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry excluding="Cs3343_project/src/" kind="src" path=""/>
+	<classpathentry kind="src" path="Cs3343_project/src"/>
 	<classpathentry kind="output" path="Cs3343_project/bin"/>
 </classpath>
