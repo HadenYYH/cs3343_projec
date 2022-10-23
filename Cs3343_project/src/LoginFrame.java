@@ -1,11 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.HashMap;
 
 public class LoginFrame extends JFrame implements ActionListener {
 	// Components of the Form
-    private Container c;
+    private Container container;
     private JLabel title;
     private JLabel sid;
     private JTextField tsid;
@@ -26,66 +25,66 @@ public class LoginFrame extends JFrame implements ActionListener {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
  
-        c = getContentPane();
-        c.setLayout(null);
+        container = getContentPane();
+        container.setLayout(null);
  
         title = new JLabel("Login");
         title.setFont(new Font("Arial", Font.PLAIN, 30));
         title.setSize(300, 30);
         title.setLocation(300, 30);
-        c.add(title);
+        container.add(title);
  
-        sid = new JLabel("Student ID");
+        sid = new JLabel("SID");
         sid.setFont(new Font("Arial", Font.PLAIN, 20));
         sid.setSize(500, 20);
         sid.setLocation(300, 100);
-        c.add(sid);
+        container.add(sid);
  
         tsid = new JTextField();
         tsid.setFont(new Font("Arial", Font.PLAIN, 15));
         tsid.setSize(300, 20);
         tsid.setLocation(300, 125);
-        c.add(tsid);
+        container.add(tsid);
  
         pw = new JLabel("Password");
         pw.setFont(new Font("Arial", Font.PLAIN, 20));
         pw.setSize(300, 20);
         pw.setLocation(300, 175);
-        c.add(pw);
+        container.add(pw);
         
         tpw = new JPasswordField();
-        tpw.setEchoChar((char)0);
+        tpw.setEchoChar('\u25cf');
         tpw.setFont(new Font("Arial", Font.PLAIN, 15));
         tpw.setSize(400, 20);
         tpw.setLocation(300, 200);
-        c.add(tpw);
+        container.add(tpw);
         
         sub = new JButton("Submit");
         sub.setFont(new Font("Arial", Font.PLAIN, 15));
         sub.setSize(200, 30);
         sub.setLocation(300, 250);
         sub.addActionListener(this);
-        c.add(sub);
+        container.add(sub);
         
         forgetPw = new JButton("forget password");
         forgetPw.setFont(new Font("Arial", Font.PLAIN, 15));
         forgetPw.setSize(200, 30);
         forgetPw.setLocation(300, 300);
         forgetPw.addActionListener(this);
-        c.add(forgetPw);
+        container.add(forgetPw);
  
         back = new JButton("back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(200, 30);
         back.setLocation(300, 350);
         back.addActionListener(this);
-        c.add(back);
+        container.add(back);
         
         result = new JLabel("");
         result.setFont(new Font("Arial", Font.PLAIN, 20));
-        result.setSize(100, 20);
+        result.setSize(500, 20);
         result.setLocation(300, 400);
-        c.add(result);
+        container.add(result);
  
         setVisible(true);
     }
@@ -98,33 +97,23 @@ public class LoginFrame extends JFrame implements ActionListener {
         if (e.getSource() == sub) {
         	String sidText = tsid.getText();
         	String pwText = String.valueOf(tpw.getPassword());
-        	SidandPw sidandPw = SidandPw.getInstance();
         	
-        	boolean sidValid = (sidText.length() == 8) & sidText.matches("[0-9]+");
-        	boolean sidExist = sidandPw.containsKey(sidText);
-        	boolean pwCorrect = pwText.equals(sidandPw.get(sidText));
+        	Account account = new Account();
+        	account.login(sidText, pwText);
         	
-            if (!sidValid) {
-            	result.setText("Invalid SID");
-            }
-            else if (!sidExist) {
-            	result.setText("Wrong SID or password");
-            }
-            else if (!pwCorrect) {
-            	result.setText("Wrong SID or password");
-            }
-            else {
-            	result.setText("Login successful!");
-            }
+        	if(account.loggedIn()) {
+            	new WelcomeFrame(account);
+            	this.dispose();
+        	}
         }
         
         else if (e.getSource() == forgetPw) {
-        	//ForgetPwFrame f = new ForgetPwFrame();
+        	new ForgetPwFrame();
             this.dispose();
         }
  
         else if (e.getSource() == back) {
-        	SelectionFrame f = new SelectionFrame();
+        	new SelectionFrame();
             this.dispose();
         }
     }
