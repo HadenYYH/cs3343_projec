@@ -62,10 +62,12 @@ public class Services {
 		String dirPath = "./src/user/";
 	    File dir = new File(dirPath);
 	    ArrayList<String> file_array = new ArrayList<String>();
-	    for (File f : dir.listFiles()) {
-	        if (f.isFile() && f.getName().endsWith(".txt")) {
-	        	file_array.add(f.getName());
-	        }
+	    if(dir.listFiles()!=null) {
+		    for (File f : dir.listFiles()) {
+		        if (f.isFile() && f.getName().endsWith(".txt")) {
+		        	file_array.add(f.getName());
+		        }
+		    }
 	    }
 	    return file_array;
 	}
