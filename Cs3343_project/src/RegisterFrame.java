@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 public class RegisterFrame extends JFrame implements ActionListener {
 	// Components of the Form
@@ -194,7 +195,9 @@ public class RegisterFrame extends JFrame implements ActionListener {
         	boolean pw_no_comma = !pw_text.matches(".*[,].*");
         	boolean pw2_correct = pw_text.equals(pw2_text);
         	boolean email_valid = email_text.endsWith("@my.cityu.edu.hk");
-            System.out.println(sid_exist);
+
+        	String hashed_pw = "";
+        	ArrayList<String> file_list = services.getALLTextFileInDirectory();
         	
         	if (!sid_valid) {
             	result.setText("Invalid sid");
@@ -223,8 +226,15 @@ public class RegisterFrame extends JFrame implements ActionListener {
             else if (!pw2_correct) {
             	result.setText("Two passwords are different");
             }
-            else {
-            	String hashed_pw = "";
+            else if(name_text.length()>15) {
+            	result.setText("Username too long");
+            }
+            else if(services.checkEmail(email_text, file_list)){
+            	result.setText("Email already used");
+            	
+            }
+            else{
+            	
 				try {
 					hashed_pw = services.getHashPw(sid_exist, pw_text);
 				} catch (NoSuchAlgorithmException e1) {

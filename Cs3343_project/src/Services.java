@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Services {
     
@@ -18,7 +19,6 @@ public class Services {
 		byte[] hash = digest.digest(sid_and_pw.getBytes(StandardCharsets.UTF_8));
 
 		hash_pw = hash.toString();
-        System.out.println(hash_pw);
 		
 		return hash_pw;
 	}
@@ -56,5 +56,39 @@ public class Services {
 		      e.printStackTrace();
 		}
 	    
+	}
+	
+	public ArrayList<String> getALLTextFileInDirectory() {
+		String dirPath = "./src/user/";
+	    File dir = new File(dirPath);
+	    ArrayList<String> file_array = new ArrayList<String>();
+	    for (File f : dir.listFiles()) {
+	        if (f.isFile() && f.getName().endsWith(".txt")) {
+	        	file_array.add(f.getName());
+	        }
+	    }
+	    return file_array;
+	}
+	
+	public boolean checkEmail(String email,ArrayList<String> file_list) {
+		String user_data = "";
+		String file_name = "./src/user/";
+		for(int i=0; i<file_list.size();i++) {
+			String user_data_array [];
+		    File target_file = new File("./src/user/" + file_list.get(i));
+		    Scanner myReader;
+			try {
+				myReader = new Scanner(target_file);
+			    user_data = myReader.nextLine();
+		        myReader.close();
+		        user_data_array = user_data.split(",");
+		        if(email.equals(user_data_array[2])) {
+		    		return true;
+		        }
+			} catch (FileNotFoundException e) {
+				continue;
+			}
+		}
+		return false;
 	}
 }
