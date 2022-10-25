@@ -36,7 +36,7 @@ public class Account {
     	boolean pwNoComma = !pw.matches(".*[,].*");
     	boolean pw2Correct = pw.equals(pw2);
     	Services services = new Services();
-    	String hashed_pw = "";
+    	StringBuilder hashed_pw = new StringBuilder();
     	ArrayList<String> file_list = services.getALLTextFileInDirectory();
     	
     	String fileExist = services.getUserDataBySid(sid);
@@ -92,23 +92,30 @@ public class Account {
         }
 	}
 	
-	public void login(String sid, String pw) {
+	public void login(String sid, String pw) throws NoSuchAlgorithmException {
 		SidandData sidandPw = SidandData.getInstance();
-		
-    	boolean sidExist = sidandPw.containsKey(sid);
-    	boolean pwCorrect = pw.equals(sidandPw.getPw(sid));
+    	Services services = new Services();
     	
         if (!validSid(sid)) {
         	JOptionPane.showMessageDialog(null, "Invalid sid");
         }
-        else if (!sidExist | !pwCorrect) {
-        	JOptionPane.showMessageDialog(null, "Wrong SID or password");
-        }
         else {
-        	this.name = sidandPw.getName(sid);
-    		loggedIn = true;
-    		JOptionPane.showMessageDialog(null, "Login Sucessfully!");
+        	String user_data = services.getUserDataBySid(sid);
+	        if(user_data!=null) {
+	        	String user_data_array [];
+		        user_data_array = user_data.split(",");
+		        StringBuilder encrypted_pw = services.getHashPw(sid, pw);
+	        	if (encrypted_pw.toString().equals(user_data_array[3])) {
+	        		loggedIn = true;
+	        		JOptionPane.showMessageDialog(null, "Login Sucessfully!");
+		        }else {
+		        	JOptionPane.showMessageDialog(null, "Wrong SID or password");
+	        	}
+	        }else {
+	        	JOptionPane.showMessageDialog(null, "Wrong SID or password");
+	        }
         }
+        
 	}
 	
 	public boolean checkForget(String sid) {

@@ -9,18 +9,24 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import java.io.*;
+import java.util.*;
+
 public class Services {
     
-	public String getHashPw(String sid, String pw) throws NoSuchAlgorithmException{
+	public StringBuilder getHashPw(String sid, String pw) throws NoSuchAlgorithmException{
 		String hash_pw = "";
 		String sid_and_pw = sid+pw;
+		StringBuilder sb = new StringBuilder();
 		
 		MessageDigest digest = MessageDigest.getInstance("SHA-256");
 		byte[] hash = digest.digest(sid_and_pw.getBytes(StandardCharsets.UTF_8));
 
 		hash_pw = hash.toString();
-		
-		return hash_pw;
+		for (byte b : hash) {
+		    sb.append(String.format("%02X", b));
+		}
+		return sb;
 	}
 	
 	public String getUserDataBySid(String sid){
@@ -38,8 +44,8 @@ public class Services {
 		return user_data;
 	}
 	
-	public void writeUserData(String sid, String name, String email, String hased_pw){
-		String user_data = sid+","+name+","+email+","+hased_pw;
+	public void writeUserData(String sid, String name, String email, StringBuilder hashed_pw){
+		String user_data = sid+","+name+","+email+","+hashed_pw;
 		String file_name = "./src/user/" + sid + ".txt";
 		
 		try {

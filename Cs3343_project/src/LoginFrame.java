@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.security.NoSuchAlgorithmException;
 
 public class LoginFrame extends JFrame implements ActionListener {
 	// Components of the Form
@@ -99,7 +100,12 @@ public class LoginFrame extends JFrame implements ActionListener {
         	String pwText = String.valueOf(tpw.getPassword());
         	
         	Account account = new Account();
-        	account.login(sidText, pwText);
+        	try {
+				account.login(sidText, pwText);
+			} catch (NoSuchAlgorithmException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
         	
         	if(account.loggedIn()) {
             	new WelcomeFrame(account);
