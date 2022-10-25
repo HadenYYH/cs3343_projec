@@ -119,22 +119,27 @@ public class Account {
 	}
 	
 	public boolean checkForget(String sid) {
-		SidandData sidandPw = SidandData.getInstance();
+    	Services services = new Services();
     	
-    	boolean sidExist = sidandPw.containsKey(sid);
-    	
-        if (!validSid(sid)) {
+    	if (!validSid(sid)) {
         	JOptionPane.showMessageDialog(null, "Invalid sid");
         	return false;
         }
-        else if (!sidExist) {
-        	JOptionPane.showMessageDialog(null, "Wrong SID");
-        	return false;
-        }
         else {
-        	//Send email
-        	JOptionPane.showMessageDialog(null, "A temporary password has been sent to your email\nPlease login again");
-        	return true;
+        	String user_data = services.getUserDataBySid(sid);
+	        if(user_data!=null) {
+	        	//Send email
+				String user_data_array [];
+		        user_data_array = user_data.split(",");
+		        String email = user_data_array[2];
+
+	        	JOptionPane.showMessageDialog(null, "A temporary password has been sent to your email\nPlease login again");
+	        	return true;
+	        	
+	        }else {
+	        	JOptionPane.showMessageDialog(null, "Wrong SID or password");
+	        	return false;
+	        }
         }
 	}
 	
