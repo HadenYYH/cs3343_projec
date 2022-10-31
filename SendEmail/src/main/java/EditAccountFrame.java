@@ -88,14 +88,14 @@ public class EditAccountFrame extends JFrame implements ActionListener {
         tpw.setLocation(250, 275);
         container.add(tpw);
  
-        sub = new JButton("Submit");
+        sub = new JButton("submit");
         sub.setFont(new Font("Arial", Font.PLAIN, 15));
         sub.setSize(150, 20);
         sub.setLocation(250, 375);
         sub.addActionListener(this);
         container.add(sub);
  
-        reset = new JButton("Reset");
+        reset = new JButton("reset");
         reset.setFont(new Font("Arial", Font.PLAIN, 15));
         reset.setSize(150, 20);
         reset.setLocation(425, 375);

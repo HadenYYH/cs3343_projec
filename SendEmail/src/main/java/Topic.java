@@ -21,8 +21,7 @@ public class Topic {
 		this.name = name;
 		this.description = description;
 		resetDate();
-		Topics.getInstance().putTopic(id, this);
-		creator.putTopic(this);
+		Topics.getInstance().put(id, this);
 		JOptionPane.showMessageDialog(null, "Topic created\n id: " + id);
 	}
     
@@ -32,7 +31,6 @@ public class Topic {
 		this.name = name;
 		this.description = description;
 		resetDate();
-		creator.putTopic(this);
 	}
     
 	public String getName() {
@@ -59,8 +57,20 @@ public class Topic {
 		return description;
 	}
 	
+	public boolean checkCreator(String sid) {
+		return creator.checkSid(sid);
+	}
+	
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	public boolean edit(String name, String description) {
+		this.name = name;
+		this.description = description;
+		Topics.getInstance().put(id, this);
+		JOptionPane.showMessageDialog(null, "Edit sucessfully");
+		return true;
 	}
 }

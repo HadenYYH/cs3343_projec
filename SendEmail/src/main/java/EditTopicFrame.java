@@ -2,25 +2,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class TopicFrame extends JFrame implements ActionListener {
+public class EditTopicFrame extends JFrame implements ActionListener {
 	// Components of the Form
     private Container container;
     private JLabel title;
+    private JLabel name;
+    private JTextField tname;
     private JLabel id;
     private JLabel tid;
     private JLabel creator;
     private JLabel tcreator;
     private JLabel description;
-    private JLabel tdescription;
+    private JTextArea tdescription;
     private JLabel dates;
     private JLabel tdates;
-	private JButton vote;
-	private JButton edit;
+	private JButton sub;
+    private JButton reset;
+	private JButton delete;
 	private JButton back;
     private Account user;
     private Topic topic;
         
-    public TopicFrame(Account user, Topic topic) {
+    public EditTopicFrame(Account user, Topic topic) {
     	this.user = user;
     	this.topic = topic;
     	
@@ -38,16 +41,28 @@ public class TopicFrame extends JFrame implements ActionListener {
         title.setLocation(250, 25);
         container.add(title);
  
+        name = new JLabel("Name");
+        name.setFont(new Font("Arial", Font.PLAIN, 20));
+        name.setSize(100, 20);
+        name.setLocation(250, 100);
+        container.add(name);
+ 
+        tname = new JTextField(topic.getName());
+        tname.setFont(new Font("Arial", Font.PLAIN, 15));
+        tname.setSize(150, 20);
+        tname.setLocation(250, 125);
+        container.add(tname);
+ 
         id = new JLabel("Topic ID");
         id.setFont(new Font("Arial", Font.PLAIN, 20));
         id.setSize(100, 20);
-        id.setLocation(250, 100);
+        id.setLocation(500, 100);
         container.add(id);
  
         tid = new JLabel(topic.getId());
         tid.setFont(new Font("Arial", Font.PLAIN, 20));
         tid.setSize(100, 20);
-        tid.setLocation(250, 125);
+        tid.setLocation(500, 125);
         container.add(tid);
  
         creator = new JLabel("Creator");
@@ -76,41 +91,46 @@ public class TopicFrame extends JFrame implements ActionListener {
  
         description = new JLabel("Description");
         description.setFont(new Font("Arial", Font.PLAIN, 20));
+        
         description.setSize(300, 20);
         description.setLocation(250, 325);
         container.add(description);
         
-        tdescription = new JLabel(topic.getDescription());
+        tdescription = new JTextArea(topic.getDescription());
         tdescription.setFont(new Font("Arial", Font.PLAIN, 15));
-        tdescription.setSize(400, 20);
+        tdescription.setSize(400, 60);
         tdescription.setLocation(250, 350);
         container.add(tdescription);
         
-        vote = new JButton("vote");
-        vote.setFont(new Font("Arial", Font.PLAIN, 15));
-        vote.setSize(100, 20);
-        vote.setLocation(250, 425);
-        vote.addActionListener(this);
-        container.add(vote);
-        
-        edit = new JButton("edit");
-        edit.setFont(new Font("Arial", Font.PLAIN, 15));
-        edit.setSize(100, 20);
-        edit.setLocation(400, 425);
-        edit.addActionListener(this);
-        container.add(edit);
+        sub = new JButton("submit");
+        sub.setFont(new Font("Arial", Font.PLAIN, 15));
+        sub.setSize(150, 20);
+        sub.setLocation(250, 450);
+        sub.addActionListener(this);
+        container.add(sub);
+ 
+        reset = new JButton("reset");
+        reset.setFont(new Font("Arial", Font.PLAIN, 15));
+        reset.setSize(150, 20);
+        reset.setLocation(550, 450);
+        reset.addActionListener(this);
+        container.add(reset);
+ 
+        delete = new JButton("delete");
+        delete.setFont(new Font("Arial", Font.PLAIN, 15));
+        delete.setSize(150, 20);
+        delete.setLocation(250, 475);
+        delete.addActionListener(this);
+        container.add(delete);
  
         back = new JButton("back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
-        back.setSize(100, 20);
-        back.setLocation(550, 425);
+        back.setSize(150, 20);
+        back.setLocation(550, 475);
         back.addActionListener(this);
         container.add(back);
  
         setVisible(true);
-        if(!topic.checkCreator(user.getSid())) {
-        	edit.setVisible(false);
-        }
 	}
 
 	// method actionPerformed()
@@ -118,11 +138,27 @@ public class TopicFrame extends JFrame implements ActionListener {
     // by the user and act accordingly
     public void actionPerformed(ActionEvent e)
     {
-        if (e.getSource() == vote) {
-        	//topic.vote
+        if (e.getSource() == sub) {
+        	String nameText = tname.getText();
+        	String descriptionText = tdescription.getText();
+        	
+        	if(topic.edit(nameText, descriptionText)) {
+            	new MenuFrame(user);
+            	this.dispose();
+        	}
         }
-        else if (e.getSource() == edit) {
-        	new EditTopicFrame(user, topic);
+        else if (e.getSource() == reset) {
+            tname.setText(topic.getName());
+            tdescription.setText(topic.getDescription());
+        }
+        else if (e.getSource() == delete) {
+        	String message = "Are you sure you want to delete this topic?\n This cannot be undone.";
+    		int reply = JOptionPane.showConfirmDialog(null, message, "Warning", JOptionPane.YES_NO_OPTION);
+    		if(reply == JOptionPane.YES_NO_OPTION) {
+    			Topics.getInstance().remove(topic.getId());
+    			new ViewFrame(user);
+            	this.dispose();
+    		}
         }
         else if (e.getSource() == back) {
         	new ViewFrame(user);

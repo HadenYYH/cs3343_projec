@@ -2,6 +2,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+import javax.swing.JLabel;
+
 public class Topics  {  
 
 	private static Map<String, Topic> topics = new HashMap<String, Topic>();
@@ -27,11 +29,15 @@ public class Topics  {
     	return instance;
     }
     
-    public Vector<Topic> getVector(){
+    public Vector<Topic> getVector(String sid){
     	Vector<Topic> items = new Vector<Topic>();
-        for (Topic topic : topics.values()) {
-        	items.add(topic);
+    	
+    	for (Topic topic : topics.values()) {
+			if(topic.checkCreator(sid)) {
+            	items.add(topic);
+			}
         }
+        
     	return items;
     }
     
@@ -47,7 +53,12 @@ public class Topics  {
 		return topics.size();
 	}
 	
-	public void putTopic(String id, Topic topic) {
+	public void put(String id, Topic topic) {
     	topics.put(id, topic);
     }
+
+	public void remove(String id) {
+		topics.remove(id);
+		
+	}
 }

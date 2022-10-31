@@ -11,7 +11,7 @@ class MenuFrame extends JFrame implements ActionListener {
     private JLabel name;
     private JButton view;
     private JButton create;
-    private JButton modify;
+    private JButton userTopics;
     private JButton account;
     private JButton exit;
     private Account user;
@@ -62,12 +62,12 @@ class MenuFrame extends JFrame implements ActionListener {
         create.addActionListener(this);
         container.add(create);
         
-        modify = new JButton("Modify my topics");
-        modify.setFont(new Font("Arial", Font.PLAIN, 15));
-        modify.setSize(300, 50);
-        modify.setLocation(250, 300);
-        modify.addActionListener(this);
-        container.add(modify);
+        userTopics = new JButton("My topics");
+        userTopics.setFont(new Font("Arial", Font.PLAIN, 15));
+        userTopics.setSize(300, 50);
+        userTopics.setLocation(250, 300);
+        userTopics.addActionListener(this);
+        container.add(userTopics);
         
         account = new JButton("User account");
         account.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -93,7 +93,7 @@ class MenuFrame extends JFrame implements ActionListener {
         	name.setText(user.getName());
     	}
     	create.setVisible(loggedIn);
-    	modify.setVisible(loggedIn);
+    	userTopics.setVisible(loggedIn);
     	account.setVisible(loggedIn);
     	
     	login.setVisible(!loggedIn);
@@ -115,7 +115,7 @@ class MenuFrame extends JFrame implements ActionListener {
         	new CreateFrame(user);
             this.dispose();
         }
-        else if (e.getSource() == modify) {
+        else if (e.getSource() == userTopics) {
         	new UserTopicFrame(user);
             this.dispose();
         }

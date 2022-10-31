@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JOptionPane;
 
 public class Account {
@@ -8,7 +5,6 @@ public class Account {
 	private String name;
 	private String email;
 	private String pw;
-	private List<Topic> myTopics = new ArrayList<Topic>();
 	private boolean loggedIn;;
 	
 	public Account() {
@@ -216,10 +212,6 @@ public class Account {
         }
 	}
 	
-	public void putTopic(Topic topic) {
-		myTopics.add(topic);
-	}
-	
 	public void logout() {
 		loggedIn = false;
 		SidandData.getInstance().put(sid, this);
@@ -247,5 +239,14 @@ public class Account {
 	
 	public boolean loggedIn() {
 		return loggedIn;
+	}
+
+	public boolean checkSid(String sid) {
+		if(sid.equals("all") | sid.equals(this.sid)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }
