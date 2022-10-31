@@ -6,7 +6,7 @@ public class SidandData {
 	
     private SidandData(){
     	String name = "cs3343";
-    	String email = "cd3343@my.cityu.edu.hk";
+    	String email = "choulwu2-c@my.cityu.edu.hk";
     	String pw = "aA123456!";
     	String[] data = {name, email, pw};
     	loginInfo.put("12345678", data);

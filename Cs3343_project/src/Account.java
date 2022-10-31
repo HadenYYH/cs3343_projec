@@ -1,4 +1,6 @@
 import javax.swing.JOptionPane;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 public class Account {
 	private String name;
@@ -33,6 +35,11 @@ public class Account {
     	boolean pwSymbol = pw.matches(".*[^\\w].*");
     	boolean pwNoComma = !pw.matches(".*[,].*");
     	boolean pw2Correct = pw.equals(pw2);
+    	Services services = new Services();
+    	String hashed_pw = "";
+    	ArrayList<String> file_list = services.getALLTextFileInDirectory();
+    	
+    	String fileExist = services.getUserDataBySid(sid);
     	
     	if (!validSid(sid)) {
         	JOptionPane.showMessageDialog(null, "Invalid sid");
@@ -61,7 +68,23 @@ public class Account {
         else if (!pw2Correct) {
         	JOptionPane.showMessageDialog(null, "Two passwords are different");
         }
+        else if(name.length()>15) {
+        	JOptionPane.showMessageDialog(null, "Username too long");
+        }
+        else if(services.checkEmail(email, file_list)){
+        	JOptionPane.showMessageDialog(null,"Email already used");
+        }
+        else if(fileExist!=null){
+        	JOptionPane.showMessageDialog(null,"SID already used");
+        }
         else {
+			try {
+				hashed_pw = services.getHashPw(sid, pw);
+			} catch (NoSuchAlgorithmException e1) {
+				e1.printStackTrace();
+			}
+        	services.writeUserData(sid, name, email, hashed_pw);
+        	
     		sidandPw.put(sid, name, email, pw);
     		this.name = name;
     		loggedIn = true;

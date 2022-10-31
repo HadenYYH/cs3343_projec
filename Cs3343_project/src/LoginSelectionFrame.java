@@ -2,17 +2,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
  
-class SelectionFrame extends JFrame implements ActionListener {
+class LoginSelectionFrame extends JFrame implements ActionListener {
 
     // Components of the Form
     private Container container;
     private JButton login;
 	private JButton register;
-	private JButton exit;
+	private JButton back;
     
     // constructor, to initialize the components
     // with default values.
-    public SelectionFrame()
+    public LoginSelectionFrame()
     {
         setTitle("Selection Page");
         setBounds(300, 90, 900, 600);
@@ -36,12 +36,12 @@ class SelectionFrame extends JFrame implements ActionListener {
         register.addActionListener(this);
         container.add(register);
  
-        exit = new JButton("Exit");
-        exit.setFont(new Font("Arial", Font.PLAIN, 15));
-        exit.setSize(300, 50);
-        exit.setLocation(300, 300);
-        exit.addActionListener(this);
-        container.add(exit);
+        back = new JButton("Exit");
+        back.setFont(new Font("Arial", Font.PLAIN, 15));
+        back.setSize(300, 50);
+        back.setLocation(300, 300);
+        back.addActionListener(this);
+        container.add(back);
  
         setVisible(true);
     }
@@ -53,10 +53,15 @@ class SelectionFrame extends JFrame implements ActionListener {
     {
     	if (e.getSource() == login) {
     		new LoginFrame();
+        	this.dispose();
     	}
     	else if (e.getSource() == register) {
     		new RegisterFrame();
+        	this.dispose();
     	}
-    	this.dispose();
+    	else if (e.getSource() == back) {
+    		new MenuFrame(new Account());
+        	this.dispose();
+    	}
     }
 }

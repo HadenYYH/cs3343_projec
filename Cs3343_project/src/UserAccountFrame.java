@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class RegisterFrame extends JFrame implements ActionListener {
+public class UserAccountFrame extends JFrame implements ActionListener {
 	// Components of the Form
     private Container container;
     private JLabel title;
@@ -58,7 +58,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
     
     // constructor, to initialize the components
     // with default values.
-    public RegisterFrame()
+    public UserAccountFrame()
     {
         setTitle("Registration");
         setBounds(300, 90, 900, 600);

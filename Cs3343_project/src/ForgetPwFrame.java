@@ -73,8 +73,8 @@ public class ForgetPwFrame extends JFrame implements ActionListener {
     {
         if (e.getSource() == sub) {
         	String sidText = tsid.getText();
-        	Account account = new Account();
-        	if(account.checkForget(sidText)) {
+        	Account user = new Account();
+        	if(user.checkForget(sidText)) {
         		new LoginFrame();
             	this.dispose();
         	}

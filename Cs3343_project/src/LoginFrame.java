@@ -98,11 +98,11 @@ public class LoginFrame extends JFrame implements ActionListener {
         	String sidText = tsid.getText();
         	String pwText = String.valueOf(tpw.getPassword());
         	
-        	Account account = new Account();
-        	account.login(sidText, pwText);
+        	Account user = new Account();
+        	user.login(sidText, pwText);
         	
-        	if(account.loggedIn()) {
-            	new WelcomeFrame(account);
+        	if(user.loggedIn()) {
+            	new MenuFrame(user);
             	this.dispose();
         	}
         }
@@ -113,7 +113,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         }
  
         else if (e.getSource() == back) {
-        	new SelectionFrame();
+        	new LoginSelectionFrame();
             this.dispose();
         }
     }
