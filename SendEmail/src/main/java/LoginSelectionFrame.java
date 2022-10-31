@@ -1,7 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
- 
+
+@SuppressWarnings("serial")
 class LoginSelectionFrame extends JFrame implements ActionListener {
 
     // Components of the Form

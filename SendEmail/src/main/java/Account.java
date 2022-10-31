@@ -94,7 +94,7 @@ public class Account {
         Account account = SidandData.getInstance().getAccount(sid);
         
         if (!pw.equals(account.getPw())) {
-        	JOptionPane.showMessageDialog(null, "Wrong SID or password");
+        	JOptionPane.showMessageDialog(null, "Wrong SID or password"+account.getPw());
         }
         else {
         	this.sid = sid;
@@ -215,10 +215,6 @@ public class Account {
 	public void logout() {
 		loggedIn = false;
 		SidandData.getInstance().put(sid, this);
-		sid = "not logged in";
-		name = "not logged in";
-		email = "not logged in";
-		pw = "not logged in";
 	}
 	
 	public String getSid() {

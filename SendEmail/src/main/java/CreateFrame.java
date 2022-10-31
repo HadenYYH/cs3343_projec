@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+@SuppressWarnings("serial")
 public class CreateFrame extends JFrame implements ActionListener {
 	// Components of the Form
     private Container container;

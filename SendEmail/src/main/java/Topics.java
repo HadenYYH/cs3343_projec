@@ -2,8 +2,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-import javax.swing.JLabel;
-
 public class Topics  {  
 
 	private static Map<String, Topic> topics = new HashMap<String, Topic>();
