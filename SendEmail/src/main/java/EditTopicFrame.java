@@ -155,7 +155,7 @@ public class EditTopicFrame extends JFrame implements ActionListener {
         else if (e.getSource() == delete) {
         	String message = "Are you sure you want to delete this topic?\n This cannot be undone.";
     		int reply = JOptionPane.showConfirmDialog(null, message, "Warning", JOptionPane.YES_NO_OPTION);
-    		if(reply == JOptionPane.YES_NO_OPTION) {
+    		if(reply == JOptionPane.YES_OPTION) {
     			Topics.getInstance().remove(topic.getId());
     			new ViewFrame(user);
             	this.dispose();
