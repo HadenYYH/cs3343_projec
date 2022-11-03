@@ -28,7 +28,7 @@ public class EditTopicFrame extends JFrame implements ActionListener {
     	this.user = user;
     	this.topic = topic;
     	
-        setTitle(topic.getName());
+        setTitle(topic.toString());
         setBounds(300, 90, 900, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
@@ -36,7 +36,7 @@ public class EditTopicFrame extends JFrame implements ActionListener {
         container = getContentPane();
         container.setLayout(null);
  
-        title = new JLabel(topic.getName());
+        title = new JLabel(topic.toString());
         title.setFont(new Font("Arial", Font.PLAIN, 30));
         title.setSize(300, 50);
         title.setLocation(250, 25);
@@ -48,7 +48,7 @@ public class EditTopicFrame extends JFrame implements ActionListener {
         name.setLocation(250, 100);
         container.add(name);
  
-        tname = new JTextField(topic.getName());
+        tname = new JTextField(topic.toString());
         tname.setFont(new Font("Arial", Font.PLAIN, 15));
         tname.setSize(150, 20);
         tname.setLocation(250, 125);
@@ -101,6 +101,8 @@ public class EditTopicFrame extends JFrame implements ActionListener {
         tdescription.setFont(new Font("Arial", Font.PLAIN, 15));
         tdescription.setSize(400, 60);
         tdescription.setLocation(250, 350);
+        tdescription.setLineWrap(true);
+        tdescription.setWrapStyleWord(true);
         container.add(tdescription);
         
         sub = new JButton("submit");
@@ -149,14 +151,11 @@ public class EditTopicFrame extends JFrame implements ActionListener {
         	}
         }
         else if (e.getSource() == reset) {
-            tname.setText(topic.getName());
+            tname.setText(topic.toString());
             tdescription.setText(topic.getDescription());
         }
         else if (e.getSource() == delete) {
-        	String message = "Are you sure you want to delete this topic?\n This cannot be undone.";
-    		int reply = JOptionPane.showConfirmDialog(null, message, "Warning", JOptionPane.YES_NO_OPTION);
-    		if(reply == JOptionPane.YES_OPTION) {
-    			Topics.getInstance().remove(topic.getId());
+    		if(Topics.getInstance().remove(topic)) {
     			new ViewFrame(user);
             	this.dispose();
     		}

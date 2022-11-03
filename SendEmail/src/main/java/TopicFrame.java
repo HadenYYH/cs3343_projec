@@ -32,7 +32,7 @@ public class TopicFrame extends JFrame implements ActionListener {
     	this.user = user;
     	this.topic = topic;
     	
-        setTitle(topic.getName());
+        setTitle(topic.toString());
         setBounds(300, 90, 900, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
@@ -40,7 +40,7 @@ public class TopicFrame extends JFrame implements ActionListener {
         container = getContentPane();
         container.setLayout(null);
  
-        title = new JLabel(topic.getName());
+        title = new JLabel(topic.toString());
         title.setFont(new Font("Arial", Font.PLAIN, 30));
         title.setSize(300, 50);
         title.setLocation(250, 25);
@@ -105,7 +105,6 @@ public class TopicFrame extends JFrame implements ActionListener {
         String white = new String(new char[30-blocks]).replace("\0", "\u2B1C");
         	
         nvotes = new JLabel(black + white);
-        //nvotes.setFont(new Font("Arial", Font.PLAIN, 15));
         nvotes.setSize(500, 20);
         nvotes.setLocation(250, 300);
         container.add(nvotes);
@@ -116,35 +115,39 @@ public class TopicFrame extends JFrame implements ActionListener {
         description.setLocation(250, 325);
         container.add(description);
         
-        tdescription = new JLabel(topic.getDescription());
+        tdescription = new JLabel("<html><body style='width: 300px'>" + topic.getDescription());
         tdescription.setFont(new Font("Arial", Font.PLAIN, 15));
-        tdescription.setSize(400, 20);
+        tdescription.setSize(400, 100);
         tdescription.setLocation(250, 350);
         container.add(tdescription);
         
         vote = new JButton("vote");
         vote.setFont(new Font("Arial", Font.PLAIN, 15));
         vote.setSize(100, 20);
-        vote.setLocation(250, 425);
+        vote.setLocation(250, 475);
         vote.addActionListener(this);
         container.add(vote);
         
         edit = new JButton("edit");
         edit.setFont(new Font("Arial", Font.PLAIN, 15));
         edit.setSize(100, 20);
-        edit.setLocation(400, 425);
+        edit.setLocation(400, 475);
         edit.addActionListener(this);
         container.add(edit);
  
         back = new JButton("back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(100, 20);
-        back.setLocation(550, 425);
+        back.setLocation(550, 475);
         back.addActionListener(this);
         container.add(back);
  
         setVisible(true);
-        if(!topic.checkCreator(user.getSid())) {
+        if(user == null) {
+        	edit.setVisible(false);
+        	vote.setVisible(false);
+        }
+        else if(!topic.checkCreator(user)) {
         	edit.setVisible(false);
         }
         if(LocalDate.now().isAfter(topic.getEnd())) {

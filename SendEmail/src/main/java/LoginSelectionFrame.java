@@ -61,7 +61,7 @@ class LoginSelectionFrame extends JFrame implements ActionListener {
         	this.dispose();
     	}
     	else if (e.getSource() == back) {
-    		new MenuFrame(new Account());
+    		new MenuFrame(null);
         	this.dispose();
     	}
     }

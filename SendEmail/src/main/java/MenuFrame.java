@@ -85,7 +85,7 @@ class MenuFrame extends JFrame implements ActionListener {
         container.add(exit);
         
         setVisible(true);
-        loggedInVisibility(user.loggedIn());
+        loggedInVisibility(user != null);
     }
     
     private void loggedInVisibility(boolean loggedIn) {

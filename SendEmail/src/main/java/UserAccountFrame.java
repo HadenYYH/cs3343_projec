@@ -122,7 +122,6 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         	this.dispose();
         }
         else if (e.getSource() == logout) {
-        	user.logout();
         	new LoginSelectionFrame();
         	this.dispose();
         }

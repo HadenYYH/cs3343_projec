@@ -76,7 +76,7 @@ public class UserTopicFrame extends JFrame implements ActionListener {
         search.addActionListener(this);
         container.add(search);
         
-        list = new JList<Topic>(topics.getVector(user.getSid()));
+        list = new JList<Topic>(topics.getVector(user));
         list.setFont(new Font("Arial", Font.PLAIN, 20));
         list.setSize(400, 300);
         list.setLocation(250, 150);

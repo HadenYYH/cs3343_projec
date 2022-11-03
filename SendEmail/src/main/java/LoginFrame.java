@@ -99,10 +99,9 @@ public class LoginFrame extends JFrame implements ActionListener {
         	String sidText = tsid.getText();
         	String pwText = String.valueOf(tpw.getPassword());
         	
-        	Account user = new Account();
-        	user.login(sidText, pwText);
+        	Account user = Accounts.getInstance().login(sidText, pwText);
         	
-        	if(user.loggedIn()) {
+        	if(user != null) {
             	new MenuFrame(user);
             	this.dispose();
         	}

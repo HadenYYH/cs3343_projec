@@ -95,10 +95,10 @@ public class CreateFrame extends JFrame implements ActionListener {
         	String nameText = tname.getText();
         	String descriptionText = tdescription.getText();
         	
-        	new Topic(user, nameText, descriptionText);
-        	
-        	new MenuFrame(user);
-            this.dispose();
+        	if(Topics.getInstance().createTopic(user, nameText, descriptionText)) {
+        		new MenuFrame(user);
+                this.dispose();
+        	}
         }
         else if (e.getSource() == reset) {
             tname.setText("");

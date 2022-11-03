@@ -9,9 +9,10 @@ public class ForgetPwFrame extends JFrame implements ActionListener {
     private JLabel title;
     private JLabel sid;
     private JTextField tsid;
+    private JLabel email;
+    private JTextField temail;
     private JButton sub;
     private JButton back;
-    private JLabel result;
     
  
     // constructor, to initialize the components
@@ -43,26 +44,32 @@ public class ForgetPwFrame extends JFrame implements ActionListener {
         tsid.setSize(300, 20);
         tsid.setLocation(250, 125);
         container.add(tsid);
+ 
+        email = new JLabel("Email");
+        email.setFont(new Font("Arial", Font.PLAIN, 20));
+        email.setSize(500, 20);
+        email.setLocation(250, 175);
+        container.add(email);
+ 
+        temail = new JTextField();
+        temail.setFont(new Font("Arial", Font.PLAIN, 15));
+        temail.setSize(300, 20);
+        temail.setLocation(250, 200);
+        container.add(temail);
         
         sub = new JButton("Submit");
         sub.setFont(new Font("Arial", Font.PLAIN, 15));
         sub.setSize(200, 30);
-        sub.setLocation(250, 175);
+        sub.setLocation(250, 250);
         sub.addActionListener(this);
         container.add(sub);
  
         back = new JButton("back");
         back.setFont(new Font("Arial", Font.PLAIN, 15));
         back.setSize(200, 30);
-        back.setLocation(250, 225);
+        back.setLocation(250, 300);
         back.addActionListener(this);
         container.add(back);
-        
-        result = new JLabel("");
-        result.setFont(new Font("Arial", Font.PLAIN, 20));
-        result.setSize(500, 20);
-        result.setLocation(250, 275);
-        container.add(result);
  
         setVisible(true);
     }
@@ -74,8 +81,8 @@ public class ForgetPwFrame extends JFrame implements ActionListener {
     {
         if (e.getSource() == sub) {
         	String sidText = tsid.getText();
-        	Account user = new Account();
-        	if(user.checkForget(sidText)) {
+        	String emailText = temail.getText();
+        	if(Accounts.getInstance().checkForget(sidText, emailText)) {
         		new LoginFrame();
             	this.dispose();
         	}
