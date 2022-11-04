@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+@SuppressWarnings("serial")
 public class UserAccountFrame extends JFrame implements ActionListener {
 	// Components of the Form
     private Container container;
@@ -121,7 +122,6 @@ public class UserAccountFrame extends JFrame implements ActionListener {
         	this.dispose();
         }
         else if (e.getSource() == logout) {
-        	user.logout();
         	new LoginSelectionFrame();
         	this.dispose();
         }

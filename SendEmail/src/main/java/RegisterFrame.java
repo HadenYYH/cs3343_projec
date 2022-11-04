@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+
+@SuppressWarnings("serial")
 public class RegisterFrame extends JFrame implements ActionListener {
 	// Components of the Form
     private Container container;
@@ -174,11 +176,8 @@ public class RegisterFrame extends JFrame implements ActionListener {
         	String pwText = String.valueOf(tpw.getPassword());
         	String pw2Text = String.valueOf(tpw2.getPassword());
         	
-        	Account user = new Account();
-        	user.register(sidText, nameText, emailText, pwText, pw2Text);
-        	
-        	if(user.loggedIn()) {
-            	new MenuFrame(user);
+        	if(Accounts.getInstance().register(sidText, nameText, emailText, pwText, pw2Text)) {
+            	new MenuFrame(Accounts.getInstance().getAccount(sidText));
             	this.dispose();
         	}
         }

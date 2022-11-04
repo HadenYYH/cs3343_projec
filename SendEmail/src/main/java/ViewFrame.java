@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+@SuppressWarnings("serial")
 public class ViewFrame extends JFrame implements ActionListener {
 	// Components of the Form
     private Container container;
@@ -75,11 +76,11 @@ public class ViewFrame extends JFrame implements ActionListener {
         search.addActionListener(this);
         container.add(search);
         
-        list = new JList<Topic>(topics.getVector());
+        list = new JList<Topic>(topics.getVector(null));
         list.setFont(new Font("Arial", Font.PLAIN, 20));
         list.setSize(400, 300);
         list.setLocation(250, 150);
-        list.setSelectedIndex(1);
+        list.setSelectedIndex(0);
         container.add(list);
  
         view = new JButton("View");
@@ -118,8 +119,13 @@ public class ViewFrame extends JFrame implements ActionListener {
         }
         else if (e.getSource() == view) {
         	Topic topic = list.getSelectedValue();
-        	new TopicFrame(user, topic);
-        	this.dispose();
+        	if(topic == null) {
+        		JOptionPane.showMessageDialog(null, "Please select a topic");
+        	}
+        	else {
+            	new TopicFrame(user, topic);
+            	this.dispose();
+            }
         }
         if (e.getSource() == back) {
         	new MenuFrame(user);

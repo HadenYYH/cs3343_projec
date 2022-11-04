@@ -77,7 +77,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/user/Documents/mysql-connector-j-8.0.31/mysql-connector-j-8.0.31.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
 >>>>>>> branch 'origin/newJerry' of https://github.com/HadenYYH/cs3343_project.git

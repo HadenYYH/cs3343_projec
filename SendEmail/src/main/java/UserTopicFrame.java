@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+@SuppressWarnings("serial")
 public class UserTopicFrame extends JFrame implements ActionListener {
 	// Components of the Form
     private Container container;
@@ -41,7 +42,7 @@ public class UserTopicFrame extends JFrame implements ActionListener {
     	this.user = user;
     	Topics topics = Topics.getInstance();
     	
-        setTitle("Create topic");
+        setTitle("My topics");
         setBounds(300, 90, 900, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
@@ -49,7 +50,7 @@ public class UserTopicFrame extends JFrame implements ActionListener {
         container = getContentPane();
         container.setLayout(null);
  
-        title = new JLabel("View all topics");
+        title = new JLabel("My topics");
         title.setFont(new Font("Arial", Font.PLAIN, 30));
         title.setSize(300, 50);
         title.setLocation(250, 25);
@@ -75,11 +76,11 @@ public class UserTopicFrame extends JFrame implements ActionListener {
         search.addActionListener(this);
         container.add(search);
         
-        list = new JList<Topic>(topics.getVector());
+        list = new JList<Topic>(topics.getVector(user));
         list.setFont(new Font("Arial", Font.PLAIN, 20));
         list.setSize(400, 300);
         list.setLocation(250, 150);
-        list.setSelectedIndex(1);
+        list.setSelectedIndex(0);
         container.add(list);
  
         view = new JButton("View");
@@ -118,8 +119,13 @@ public class UserTopicFrame extends JFrame implements ActionListener {
         }
         else if (e.getSource() == view) {
         	Topic topic = list.getSelectedValue();
-        	new TopicFrame(user, topic);
-        	this.dispose();
+        	if(topic == null) {
+        		JOptionPane.showMessageDialog(null, "Please select a topic");
+        	}
+        	else {
+            	new TopicFrame(user, topic);
+            	this.dispose();
+            }
         }
         if (e.getSource() == back) {
         	new MenuFrame(user);
