@@ -38,7 +38,7 @@ public class CreateFrame extends JFrame implements ActionListener {
  
         name = new JLabel("Topic Name");
         name.setFont(new Font("Arial", Font.PLAIN, 20));
-        name.setSize(100, 20);
+        name.setSize(300, 20);
         name.setLocation(250, 100);
         container.add(name);
  
@@ -50,7 +50,7 @@ public class CreateFrame extends JFrame implements ActionListener {
  
         description = new JLabel("Topic description");
         description.setFont(new Font("Arial", Font.PLAIN, 20));
-        description.setSize(100, 20);
+        description.setSize(300, 20);
         description.setLocation(250, 175);
         container.add(description);
  

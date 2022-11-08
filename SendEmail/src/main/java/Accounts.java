@@ -28,6 +28,10 @@ public class Accounts {
 		}
 		return false;
 	}
+
+	private void message(String message) {
+		JOptionPane.showMessageDialog(null, message);
+	}
 	
 	public boolean register(String sid, String name, String email, String pw, String pw2) {
     	boolean emailValid = email.endsWith("@my.cityu.edu.hk");
@@ -40,39 +44,39 @@ public class Accounts {
     	boolean pw2Correct = pw.equals(pw2);
     	
     	if (!validSid(sid)) {
-        	JOptionPane.showMessageDialog(null, "Invalid sid");
+        	message("Invalid sid");
         }
     	else if(sidExist) {
-        	JOptionPane.showMessageDialog(null, "This SID was registered");
+        	message("This SID was registered");
     	}
         else if(name.length()>15) {
-        	JOptionPane.showMessageDialog(null, "Username too long");
+        	message("Username too long");
         }
         else if (!emailValid) {
-        	JOptionPane.showMessageDialog(null, "Invalid email");
+        	message("Invalid email");
         }
         else if (!pwLongEnough) {
-        	JOptionPane.showMessageDialog(null, "Password must be longer than 8 chracters");
+        	message("Password must be longer than 8 chracters");
         }
         else if (!pwUpperCase) {
-        	JOptionPane.showMessageDialog(null, "Password must contain an upper case letter");
+        	message("Password must contain an upper case letter");
         }
         else if (!pwLowerCase) {
-        	JOptionPane.showMessageDialog(null, "Password must contain an lower case letter");
+        	message("Password must contain an lower case letter");
         }
         else if (!pwSymbol) {
-        	JOptionPane.showMessageDialog(null, "Password must contain a non-letter symbol");
+        	message("Password must contain a non-letter symbol");
         }
         else if (!pwNoComma) {
-        	JOptionPane.showMessageDialog(null, "Password must not contain a comma");
+        	message("Password must not contain a comma");
         }
         else if (!pw2Correct) {
-        	JOptionPane.showMessageDialog(null, "Two passwords are different");
+        	message("Two passwords are different");
         }
         else {
         	Account user = new Account(sid, name, email, pw);
     		accounts.put(sid, user);
-    		JOptionPane.showMessageDialog(null, "Register sucessfully");
+    		message("Register sucessfully");
     		return true;
         }
     	return false;
@@ -82,21 +86,21 @@ public class Accounts {
     	boolean sidExist = accounts.containsKey(sid);
     	
         if (!validSid(sid)) {
-        	JOptionPane.showMessageDialog(null, "Invalid sid");
+        	message("Invalid sid");
             return null;
         }
         else if (!sidExist) {
-        	JOptionPane.showMessageDialog(null, "Wrong SID or password");
+        	message("Wrong SID or password");
             return null;
         }
         Account account = accounts.get(sid);
         
         if (!pw.equals(account.getPw())) {
-        	JOptionPane.showMessageDialog(null, "Wrong SID or password");
+        	message("Wrong SID or password");
             return null;
         }
         else {
-    		JOptionPane.showMessageDialog(null, "Login Sucessfully!");
+    		message("Login Sucessfully!");
     		return account;
         }
 	}
@@ -105,17 +109,17 @@ public class Accounts {
     	boolean sidExist = accounts.containsKey(sid);
     	
         if (!validSid(sid)) {
-        	JOptionPane.showMessageDialog(null, "Invalid sid");
+        	message("Invalid sid");
         	return false;
         }
         else if (!sidExist) {
-        	JOptionPane.showMessageDialog(null, "Wrong SID or email");
+        	message("Wrong SID or email");
         	return false;
         }
     	Account account = accounts.get(sid);
     	
         if (!email.equals(account.getEmail())) {
-        	JOptionPane.showMessageDialog(null, "Wrong SID or email");
+        	message("Wrong SID or email");
         	return false;
         }
         else {
@@ -128,7 +132,7 @@ public class Accounts {
         	
         	SendEmail send = SendEmail.getInstance();
         	send.sendNewPw(account.getEmail(), pw);
-        	JOptionPane.showMessageDialog(null, "A temporary password has been sent to your email\nPlease login again");
+        	message("A temporary password has been sent to your email\nPlease login again");
         	return true;
         }
 	}

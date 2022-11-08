@@ -16,6 +16,10 @@ public class Topics  {
     	String description = "This is a test topic.";
 		topics.put(id, new Topic(id, creator, name, description));
     }
+
+	private void message(String message) {
+		JOptionPane.showMessageDialog(null, message);
+	}
     
     public static Topics getInstance(){
     	if (instance == null) {
@@ -26,16 +30,16 @@ public class Topics  {
     
     public boolean createTopic(Account creator, String name, String description) {
     	if(name.equals("")){
-    		JOptionPane.showMessageDialog(null, "Please input topic name");
+    		message("Please input topic name");
     		return false;
     	}
     	if(description.equals("")){
-    		JOptionPane.showMessageDialog(null, "Please input topic description");
+    		message("Please input topic description");
     		return false;
     	}
     	String id = String.format("%08d", topics.size());
     	topics.put(id, new Topic(id, creator, name, description));
-		JOptionPane.showMessageDialog(null, "Topic created\n id: " + id);
+    	message("Topic created\n id: " + id);
     	return true;
     }
     

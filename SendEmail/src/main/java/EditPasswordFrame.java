@@ -146,7 +146,7 @@ public class EditPasswordFrame extends JFrame implements ActionListener {
             tpw2.setText("");
         }
         else if (e.getSource() == back) {
-        	new LoginSelectionFrame();
+        	new EditAccountFrame(user);
             this.dispose();
         }
     }

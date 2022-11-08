@@ -14,6 +14,10 @@ public class Topic {
     private int agrees;
     private int disagrees;
     private Account creator;
+
+	private void message(String message) {
+		JOptionPane.showMessageDialog(null, message);
+	}
     
     public void resetDate() {
 		start = LocalDate.now();
@@ -39,7 +43,7 @@ public class Topic {
 		this.name = name;
 		this.description = description;
 		Topics.getInstance().put(id, this);
-		JOptionPane.showMessageDialog(null, "Edit successfully");
+		message("Edit successfully");
 		return true;
 	}
 	
@@ -50,12 +54,12 @@ public class Topic {
 		if(votes.containsKey(user)){
 			if(votes.get(user)) {
 				if(reply == JOptionPane.YES_OPTION) {
-					JOptionPane.showMessageDialog(null, "You have already agreed on this topic");
+					message("You have already agreed on this topic");
 					return false;
 				}
 				else if(reply == JOptionPane.NO_OPTION) {
 					votes.put(user, false);
-					JOptionPane.showMessageDialog(null, "Disagree successfully");
+					message("Disagree successfully");
 					agrees--;
 					disagrees++;
 				}
@@ -63,12 +67,12 @@ public class Topic {
 			else {
 				if(reply == JOptionPane.YES_OPTION) {
 					votes.put(user, true);
-					JOptionPane.showMessageDialog(null, "Agree successfully");
+					message("Agree successfully");
 					agrees++;
 					disagrees--;
 				}
 				else if(reply == JOptionPane.NO_OPTION) {
-					JOptionPane.showMessageDialog(null, "You have already disagreed on this topic");
+					message("You have already disagreed on this topic");
 					return false;
 				}
 			}
@@ -76,21 +80,16 @@ public class Topic {
 		else {
 			if(reply == JOptionPane.YES_OPTION) {
 				votes.put(user, true);
-				JOptionPane.showMessageDialog(null, "Agree successfully");
+				message("Agree successfully");
 				agrees++;
 			}
 			else if(reply == JOptionPane.NO_OPTION) {
 				votes.put(user, false);
-				JOptionPane.showMessageDialog(null, "Disagree successfully");
+				message("Disagree successfully");
 				disagrees++;
 			}
 		}
 		return true;
-	}
-	
-	@Override
-	public String toString() {
-		return name;
 	}
 
 	public String getId() {
@@ -123,5 +122,10 @@ public class Topic {
 	
 	public boolean checkCreator(Account user) {
 		return creator.checkCreator(user);
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 }

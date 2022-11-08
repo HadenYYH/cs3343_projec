@@ -19,6 +19,10 @@ public class Account {
 		}
 		return false;
 	}
+
+	private void message(String message) {
+		JOptionPane.showMessageDialog(null, message);
+	}
 	
 	public boolean edit(String sid, String name, String email, String pw) {
     	boolean emailValid = email.endsWith("@my.cityu.edu.hk");
@@ -26,26 +30,26 @@ public class Account {
     	boolean sidExist = Accounts.getInstance().containsKey(sid);
     	
     	if (!validSid(sid)) {
-        	JOptionPane.showMessageDialog(null, "Invalid sid");
+    		message("Invalid sid");
         	return false;
         }
     	else if(sidChanged & sidExist) {
-        	JOptionPane.showMessageDialog(null, "This SID was registered");
+    		message("This SID was registered");
         	return false;
     	}
         else if (!emailValid) {
-        	JOptionPane.showMessageDialog(null, "Invalid email");
+    		message("Invalid email");
         	return false;
         }
         else if(name.length()>15) {
-        	JOptionPane.showMessageDialog(null, "Username too long");
+    		message("Username too long");
         	return false;
         }
     	
         Account account = Accounts.getInstance().getAccount(sid);
         
     	if (!pw.equals(account.getPw())) {
-        	JOptionPane.showMessageDialog(null, "Wrong SID or password");
+    		message("Wrong SID or password");
         	return false;
         }
         else {
@@ -53,7 +57,7 @@ public class Account {
     		this.email = email;
     		this.name = name;
     		Accounts.getInstance().put(sid, this);
-    		JOptionPane.showMessageDialog(null, "Edit sucessfully");
+    		message("Edit sucessfully");
     		return true;
         }
 	}
@@ -69,31 +73,32 @@ public class Account {
         Account account = Accounts.getInstance().getAccount(sid);
     	
     	if (!oldPw.equals(account.getPw())) {
-        	JOptionPane.showMessageDialog(null, "Wrong password");
+
+    		message("Wrong password");
         }
         else if (!pwLongEnough) {
-        	JOptionPane.showMessageDialog(null, "Password must be longer than 8 chracters");
+        	message("Password must be longer than 8 chracters");
         }
         else if (!pwUpperCase) {
-        	JOptionPane.showMessageDialog(null, "Password must contain an upper case letter");
+        	message("Password must contain an upper case letter");
         }
         else if (!pwLowerCase) {
-        	JOptionPane.showMessageDialog(null, "Password must contain an lower case letter");
+        	message("Password must contain an lower case letter");
         }
         else if (!pwSymbol) {
-        	JOptionPane.showMessageDialog(null, "Password must contain a non-letter symbol");
+        	message("Password must contain a non-letter symbol");
         }
         else if (!pwNoComma) {
-        	JOptionPane.showMessageDialog(null, "Password must not contain a comma");
+        	message("Password must not contain a comma");
         }
         else if (!pw2Correct) {
-        	JOptionPane.showMessageDialog(null, "Two passwords are different");
+        	message("Two passwords are different");
         }
         else {
     		this.sid = sid;
     		this.pw = pw;
     		Accounts.getInstance().put(sid, this);
-    		JOptionPane.showMessageDialog(null, "Password Changed");
+    		message("Password Changed");
     		return true;
         }
     	return false;

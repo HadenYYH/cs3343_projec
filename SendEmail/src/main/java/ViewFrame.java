@@ -17,6 +17,10 @@ public class ViewFrame extends JFrame implements ActionListener {
 	private JButton view;
 	private JButton back;
 	private Account user;
+
+	private void message(String message) {
+		JOptionPane.showMessageDialog(null, message);
+	}
 	
 	FocusListener textFocusListener = new FocusListener() {
         public void focusGained(FocusEvent focusEvent) {
@@ -114,13 +118,13 @@ public class ViewFrame extends JFrame implements ActionListener {
             	this.dispose();
         	}
         	else {
-        		JOptionPane.showMessageDialog(null, "ID not found");
+        		message("ID not found");
         	}
         }
         else if (e.getSource() == view) {
         	Topic topic = list.getSelectedValue();
         	if(topic == null) {
-        		JOptionPane.showMessageDialog(null, "Please select a topic");
+        		message("Please select a topic");
         	}
         	else {
             	new TopicFrame(user, topic);
