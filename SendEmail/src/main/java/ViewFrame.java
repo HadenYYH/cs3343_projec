@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Vector;
 
 @SuppressWarnings("serial")
 public class ViewFrame extends JFrame implements ActionListener {
@@ -46,7 +47,7 @@ public class ViewFrame extends JFrame implements ActionListener {
     	this.user = user;
     	Topics topics = Topics.getInstance();
     	
-        setTitle("Create topic");
+        setTitle("View topics");
         setBounds(300, 90, 900, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
@@ -80,7 +81,7 @@ public class ViewFrame extends JFrame implements ActionListener {
         search.addActionListener(this);
         container.add(search);
         
-        list = new JList<Topic>(topics.getVector(null));
+        list = new JList<Topic>(topics.getVector(NullAccount.getInstance()));
         list.setFont(new Font("Arial", Font.PLAIN, 20));
         list.setSize(400, 300);
         list.setLocation(250, 150);
@@ -136,4 +137,14 @@ public class ViewFrame extends JFrame implements ActionListener {
             this.dispose();
         }
     }
+
+	protected void resetTitle(String text) {
+		title.setText(text);
+	}
+
+
+	protected void resetList(Vector<Topic> vector) {
+        list.setListData(vector);
+        list.setSelectedIndex(0);
+	}
 }

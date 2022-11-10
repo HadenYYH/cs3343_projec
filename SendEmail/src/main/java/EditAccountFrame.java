@@ -15,11 +15,30 @@ public class EditAccountFrame extends JFrame implements ActionListener {
     private JTextField temail;
     private JLabel pw;
     private JPasswordField tpw;
+    private String pwTip = "Enter password to confirm your changes";
     private JButton sub;
     private JButton reset;
 	private JButton editPassword;
 	private JButton back;
 	private Account user;
+    
+    FocusListener PwFocusListener = new FocusListener() {
+        public void focusGained(FocusEvent focusEvent) {
+        	JPasswordField src = (JPasswordField)focusEvent.getSource();
+        	if((src == tpw) & (String.valueOf(src.getPassword()).equals(pwTip))) {
+            	src.setEchoChar('\u25cf');
+                src.setText("");
+        	}
+        }
+
+        public void focusLost(java.awt.event.FocusEvent focusEvent) {
+        	JPasswordField src = (JPasswordField)focusEvent.getSource();
+        	if((src == tpw) & (src.getPassword().length == 0)) {
+        		src.setEchoChar((char)0);
+        		src.setText(pwTip);
+        	}
+        }
+    };
     
     // constructor, to initialize the components
     // with default values.
@@ -82,11 +101,12 @@ public class EditAccountFrame extends JFrame implements ActionListener {
         pw.setLocation(250, 250);
         container.add(pw);
         
-        tpw = new JPasswordField();
-    	//tpw2.setEchoChar('\u25cf');
+        tpw = new JPasswordField(pwTip);
+        tpw.setEchoChar((char)0);
         tpw.setFont(new Font("Arial", Font.PLAIN, 15));
         tpw.setSize(400, 20);
         tpw.setLocation(250, 275);
+        tpw.addFocusListener(PwFocusListener);
         container.add(tpw);
  
         sub = new JButton("submit");

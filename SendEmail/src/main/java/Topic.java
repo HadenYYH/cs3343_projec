@@ -121,7 +121,7 @@ public class Topic {
 	}
 	
 	public boolean checkCreator(Account user) {
-		return creator.checkCreator(user);
+		return user.checkCreator(creator);
 	}
 	
 	@Override

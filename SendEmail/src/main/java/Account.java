@@ -121,10 +121,7 @@ public class Account {
 	}
 
 	public boolean checkCreator(Account user) {
-		if(user == null) {
-			return true;
-		}
-		else if(user.equals(this)) {
+		if(user.equals(this)) {
 			return true;
 		}
 		else {
