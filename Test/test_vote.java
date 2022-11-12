@@ -9,6 +9,7 @@ import Program.Topic;
 import Program.Topics;
 import Program.Account;
 
+/*
 public class test_vote {
 
 	@Test
@@ -81,3 +82,4 @@ public class test_vote {
 		topics.remove(topic);
 	}
 }
+*/
