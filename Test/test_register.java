@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import org.junit.jupiter.api.Test;
 
 import Program.*;
-/*
+
 class test_register {
 	
 //As the original Register method in Account class output a message box, 
@@ -120,4 +120,4 @@ class test_register {
 
 
 }
-*/
+

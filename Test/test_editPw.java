@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import Program.Accounts;
 import Program.Account;
-/*
+
 public class test_editPw {
 	@Test
 	void test025() {
@@ -80,5 +80,5 @@ public class test_editPw {
 		accounts.remove("23456789");
 	}
 }
-*/
+
 

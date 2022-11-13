@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import Program.Accounts;
 import Program.Account;
 import Program.NullAccount;
-/*
+
 class test_login {
 
 
@@ -45,4 +45,3 @@ class test_login {
 
 
 }
-*/

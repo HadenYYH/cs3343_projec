@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import Program.Accounts;
 import Program.Account;
 
-/*
+
 public class test_edit {
 	@Test
 	void test019() {
@@ -66,4 +66,4 @@ public class test_edit {
 	}
 
 }
-*/
+

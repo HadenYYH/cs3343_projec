@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import Program.Accounts;
 import Program.Account;
-/*
+
 public class test_checkForgot {
 	
 	@Test
@@ -42,4 +42,4 @@ public class test_checkForgot {
 	}
 
 }
-*/
+
