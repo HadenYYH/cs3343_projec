@@ -14,7 +14,7 @@ public class test_edit {
 		Accounts accounts = Accounts.getInstance();
 		accounts.register("23456789", "Alex", "alex@my.cityu.edu.hk", "12345Ab*", "12345Ab*");
 		Account a = accounts.getAccount("23456789"); 
-		assertEquals("Edit sucessfully", a.edit("23456789", "Ben", "alex@my.cityu.edu.hk", "12345Ab*"));
+		assertEquals("Edit successfully", a.edit("23456789", "Ben", "alex@my.cityu.edu.hk", "12345Ab*"));
 		accounts.remove("23456789");
 	}
 	
@@ -61,7 +61,7 @@ public class test_edit {
 		Accounts accounts = Accounts.getInstance();
 		accounts.register("23456789", "Alex", "alex@my.cityu.edu.hk", "12345Ab*", "12345Ab*");
 		Account a = accounts.getAccount("23456789"); 
-		assertEquals("Wrong SID or password", a.edit("23456789", "Ben", "alex@my.cityu.edu.hk", "12345Ac*"));
+		assertEquals("Wrong password", a.edit("23456789", "Ben", "alex@my.cityu.edu.hk", "12345Ac*"));
 		accounts.remove("23456789");
 	}
 
