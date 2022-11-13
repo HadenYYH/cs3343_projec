@@ -9,7 +9,7 @@ import Program.Topic;
 import Program.Topics;
 import Program.Account;
 
-/*
+
 public class test_vote {
 
 	@Test
@@ -81,5 +81,40 @@ public class test_vote {
 		assertEquals("Disagree successfully", topic.vote(a));
 		topics.remove(topic);
 	}
+	
+	@Test
+	void test043() {
+		Accounts accounts = Accounts.getInstance();
+		accounts.register("23456789", "Alex", "alex@my.cityu.edu.hk", "12345Ab*", "12345Ab*");
+		Account a = accounts.getAccount("23456789"); 
+		Topic topic = new Topic("23456789", a, "test", "test_description");
+		Topics topics = Topics.getInstance();
+		assertEquals("", topic.vote(a));
+		topics.remove(topic);
+	}
+	
+	@Test
+	void test044() {
+		Accounts accounts = Accounts.getInstance();
+		accounts.register("23456789", "Alex", "alex@my.cityu.edu.hk", "12345Ab*", "12345Ab*");
+		Account a = accounts.getAccount("23456789"); 
+		Topic topic = new Topic("23456789", a, "test", "test_description");
+		Topics topics = Topics.getInstance();
+		topic.vote(a);
+		assertEquals("", topic.vote(a));
+		topics.remove(topic);
+	}
+	
+	@Test
+	void test045() {
+		Accounts accounts = Accounts.getInstance();
+		accounts.register("23456789", "Alex", "alex@my.cityu.edu.hk", "12345Ab*", "12345Ab*");
+		Account a = accounts.getAccount("23456789"); 
+		Topic topic = new Topic("23456789", a, "test", "test_description");
+		Topics topics = Topics.getInstance();
+		topic.vote(a);
+		assertEquals("", topic.vote(a));
+		topics.remove(topic);
+	}
 }
-*/
+
