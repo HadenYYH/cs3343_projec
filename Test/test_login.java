@@ -15,7 +15,7 @@ class test_login {
 	void test015() {
 		Accounts accounts = Accounts.getInstance();
 		accounts.register("23456789", "Alex", "alex@my.cityu.edu.hk", "12345Ab*", "12345Ab*");
-		assertEquals(accounts.getAccount("23456789"), accounts.login("23456789", "12345Ab*"));
+		assertEquals("Login Successfully!", accounts.login("23456789", "12345Ab*"));
 		accounts.remove("23456789");
 	}
 	
@@ -23,7 +23,7 @@ class test_login {
 	void test016() {
 		Accounts accounts = Accounts.getInstance();
 		accounts.register("23456789", "Alex", "alex@my.cityu.edu.hk", "12345Ab*", "12345Ab*");
-		assertEquals(NullAccount.getInstance(), accounts.login("23456781", "12345Ab*"));
+		assertEquals("Wrong SID or password", accounts.login("23456781", "12345Ab*"));
 		accounts.remove("23456789");
 	}
 	
@@ -31,7 +31,7 @@ class test_login {
 	void test017() {
 		Accounts accounts = Accounts.getInstance();
 		accounts.register("23456789", "Alex", "alex	@my.cityu.edu.hk", "12345Ab*", "12345Ab*");
-		assertEquals(NullAccount.getInstance(), accounts.login("23456789", "12345Ac*"));
+		assertEquals("Wrong SID or password", accounts.login("23456789", "12345Ac*"));
 		accounts.remove("23456789");
 	}
 	
@@ -39,9 +39,10 @@ class test_login {
 	void test018() {
 		Accounts accounts = Accounts.getInstance();
 		accounts.register("23456789", "Alex", "alex@my.cityu.edu.hk", "12345Ab*", "12345Ab*");
-		assertEquals(NullAccount.getInstance(), accounts.login("234567891", "12345Ac*"));
+		assertEquals("Invalid SID", accounts.login("234567891", "12345Ac*"));
 		accounts.remove("23456789");
 	}
 
 
 }
+

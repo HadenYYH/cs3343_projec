@@ -13,7 +13,7 @@ public class test_edit {
 	void test019() {
 		Accounts accounts = Accounts.getInstance();
 		accounts.register("23456789", "Alex", "alex@my.cityu.edu.hk", "12345Ab*", "12345Ab*");
-		Account a = accounts.getAccount("23456789"); 
+		Account a = accounts.getAccount("23456789");
 		assertEquals("Edit successfully", a.edit("23456789", "Ben", "alex@my.cityu.edu.hk", "12345Ab*"));
 		accounts.remove("23456789");
 	}
